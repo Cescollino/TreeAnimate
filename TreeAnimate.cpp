@@ -1,11 +1,28 @@
 // TreeAnimate.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
+
+#include "Tree.h"
 
 int main()
 {
     std::cout << "Hello World!\n";
+    IParam Parameters{};
+
+    std::string Mbranches{};
+    std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
+    std::getline(std::cin, Mbranches);
+    Parameters.maxBranches = std::stoi(Mbranches);
+
+    std::string Longueur{};
+    std::cout << "Quel est le multiple de longueur de branche que vous désirez?\n";
+    std::getline(std::cin, Longueur);
+    Parameters.lenght = std::stof(Longueur);
+
+    std::string NMax{};
+    std::cout << "Quel est le niveau maximal de noeuds que vous désirez?\n";
+    std::getline(std::cin, NMax);
+    Parameters.maxLvl = std::stoi(NMax);
 
 }
 

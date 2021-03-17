@@ -139,7 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Cescollino\Minesweeper\Minesweeper\Game.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeAnimate.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Cescollino\Minesweeper\Minesweeper\Game.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
