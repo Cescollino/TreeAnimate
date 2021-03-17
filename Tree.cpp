@@ -43,14 +43,17 @@ void Tree::makeTree(IParam parameters)
 void Tree::makeNode(Node* currentNode)
 {
 	if (currentNode == nullptr) {// for head pointer, initializing tree
- 
-	}
-	else {
+	
+		currentNode = new Node(&mParameters);
 
+	}else{
+		if (getLevel() < mParameters.maxLvl) {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//instead of getlevel use currentnode -> level 
+		}
 	}
-	if (getLevel() < mParameters.maxLvl) {
-		makeNode();
-	}
+
+	
 
 }
 

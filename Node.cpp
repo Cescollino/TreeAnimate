@@ -1,8 +1,8 @@
 #include "Node.h"
 
-Node::Node(IParam parameters)
+Node::Node(IParam* parameters)
 {
-	
+	TreeParameters = parameters;
 }
 
 Node::~Node()
@@ -29,4 +29,16 @@ Node* Node::getKids()
 		return nullptr;
 
 	}
+}
+
+void Node::setKids(Node* Kid, int level)
+{
+	
+	mKids = new Node[5];
+
+}
+
+void Node::setPrevious(Node* Parent)
+{
+	mPrevious = Parent;
 }
