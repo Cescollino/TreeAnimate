@@ -7,6 +7,9 @@ Node::Node(IParam* parameters)
 
 Node::~Node()
 {
+	for (auto x : mKids){
+		delete x;
+	}
 }
 
 Node* Node::getPrevious()
@@ -20,25 +23,28 @@ Node* Node::getPrevious()
 	}
 }
 
-Node* Node::getKids()
+std::list<Node*>* Node::getKids()
 {
-	if (mKids) {
-		return mKids;
-	}
-	else {
-		return nullptr;
-
-	}
+	return &mKids;
 }
 
-void Node::setKids(Node* Kid, int level)
+void Node::setKids(Node* Kid)
 {
-	
-	mKids = new Node[5];
-
+	mKids.insert(mKids.end(), Kid);
+	mKids.back()->setLevel(Kid->getPrevious()->getlevel() + 1);
 }
 
 void Node::setPrevious(Node* Parent)
 {
 	mPrevious = Parent;
+}
+
+int Node::getlevel()
+{
+	return mLevel;
+}
+
+void Node::setLevel(int level)
+{
+	mLevel = level;
 }

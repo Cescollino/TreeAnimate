@@ -47,9 +47,8 @@ void Tree::makeNode(Node* currentNode)
 		currentNode = new Node(&mParameters);
 
 	}else{
-		if (getLevel() < mParameters.maxLvl) {
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//instead of getlevel use currentnode -> level 
+		if (currentNode->getlevel() < mParameters.maxLvl) {
+			currentNode->setKids(new Node(&mParameters));
 		}
 	}
 

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream> 
 #include <string>
+#include <list>
 #include "Tree.h"
 
 struct position {
@@ -18,15 +19,19 @@ public:
     Node(IParam* parameters);
     ~Node();
     Node* getPrevious();
-    Node* getKids();
-    void setKids(Node* Kid, int level);
+    std::list<Node*>* getKids(); 
+    void setKids(Node* Kid);
     void setPrevious(Node* Parent);
+    int getlevel();
+    void setLevel(int level);
+
 private:
+
     position mPosition{};
-    Node* mPrevious=nullptr;
-    Node* mKids=nullptr;
-    int mLevel{};
-    IParam* TreeParameters=nullptr;
+    Node* mPrevious=nullptr; // This can only contain one pointer
+    std::list<Node*> mKids = {}; // this points to a table of Nodes
+    int mLevel{}; // determines the level of the node inside a tree
+    IParam* TreeParameters=nullptr; // points to the parameters of the tree
 
 protected:
 
