@@ -24,6 +24,10 @@ int main()
     std::getline(std::cin, NMax);
     Parameters.maxLvl = std::stoi(NMax);
 
+    Tree mytree(Parameters);
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

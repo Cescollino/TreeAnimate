@@ -25,11 +25,10 @@ public:
     ~Tree();
     void makeinit();
     void makeTree(IParam parameters);
-
     void makeNode(Node* currentNode);
     int getLevel();
 private:
-    Node* pHead=nullptr;
+    Node* pHead = nullptr;
     IParam mParameters{};
 
 protected:

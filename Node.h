@@ -31,7 +31,7 @@ private:
     Node* mPrevious=nullptr; // This can only contain one pointer
     std::list<Node*> mKids = {}; // this points to a table of Nodes
     int mLevel{}; // determines the level of the node inside a tree
-    IParam* TreeParameters=nullptr; // points to the parameters of the tree
+    IParam* TreeParameters = nullptr; // points to the parameters of the tree
 
 protected:
 

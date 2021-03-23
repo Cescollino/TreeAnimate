@@ -62,10 +62,10 @@ int Tree::getLevel()
 	Node* cur;
 	cur = pHead;
 	while (cur) {
-		
-		cur = &(cur->getKids()[1]);
-
-		if (cur->getKids()) level++;
+		while (cur->getKids()) {
+			level++;
+			cur = cur->getKids()->back();
+	}
 	}
 	return level;	
 }
