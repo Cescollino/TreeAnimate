@@ -10,6 +10,7 @@
 #include "Node.h"
 
 
+class Node; // utile juste pour éviter une déclaration récursive
 struct IParam {
     int maxLvl{};
     int maxBranches{};
@@ -17,9 +18,8 @@ struct IParam {
     float lenght{}; 
 };
 
-
 class Tree {
-   
+  
 public:
     Tree(IParam parameters);
     ~Tree();
@@ -30,8 +30,6 @@ public:
 private:
     Node* pHead = nullptr;
     IParam mParameters{};
-
 protected:
-
 };
 #endif

@@ -7,6 +7,8 @@
 #include <string>
 #include <list>
 #include "Tree.h"
+class Tree;// utile juste pour éviter une déclaration récursive
+struct IParam;// utile juste pour éviter une déclaration récursive
 
 struct position {
     int x{};
