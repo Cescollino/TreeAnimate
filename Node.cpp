@@ -2,7 +2,14 @@
 
 Node::Node(IParam* parameters)
 {
-	TreeParameters = parameters;
+	int numberofkids = rand() % (parameters->maxBranches - parameters->minBranches) + parameters->minBranches; // generates random number for branches
+
+	if (this->getlevel() < parameters->maxLvl) {
+	for (int i = 0; i < numberofkids; i++) {
+		this->setKids(new Node(TreeParameters));
+		}
+
+	}
 }
 
 Node::~Node()
@@ -31,7 +38,8 @@ std::list<Node*>* Node::getKids()
 void Node::setKids(Node* Kid)
 {
 	mKids.insert(mKids.end(), Kid);
-	mKids.back()->setLevel(Kid->getPrevious()->getlevel() + 1);
+	Kid->setLevel(this->getlevel() + 1);
+//	mKids.back()->setLevel(Kid->getPrevious()->getlevel() + 1);
 }
 
 void Node::setPrevious(Node* Parent)

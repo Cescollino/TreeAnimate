@@ -10,7 +10,7 @@ Tree::Tree(IParam parameters)
 
 	makeinit();
 	
-	makeTree(parameters);
+	makeTree();
 	
  //13 frames***
 
@@ -30,11 +30,15 @@ void Tree::makeinit()
 
 }
 
-void Tree::makeTree(IParam parameters)
+void Tree::makeTree()
 {
 	makeNode(pHead);
+	
+	
+	
+	
+	// to be placed in separate function 
 	std::fstream fs;
-
 	fs.open("Tree.sfa", std::fstream::in);
 	fs << "my text here!" << std::endl;
 	fs.close();
@@ -42,14 +46,11 @@ void Tree::makeTree(IParam parameters)
 
 void Tree::makeNode(Node* currentNode)
 {
+	
 	if (currentNode == nullptr) {// for head pointer, initializing tree
 	
 		currentNode = new Node(&mParameters);
-
-	}else{
-		if (currentNode->getlevel() < mParameters.maxLvl) {
-			currentNode->setKids(new Node(&mParameters));
-		}
+	
 	}
 
 	

@@ -17,7 +17,7 @@ int main()
     std::string Longueur{};
     std::cout << "Quel est le multiple de longueur de branche que vous désirez?\n";
     std::getline(std::cin, Longueur);
-    Parameters.lenght = std::stof(Longueur);
+    Parameters.length = std::stof(Longueur);
 
     std::string NMax{};
     std::cout << "Quel est le niveau maximal de noeuds que vous désirez?\n";
