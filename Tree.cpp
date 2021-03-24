@@ -2,16 +2,11 @@
 
 Tree::Tree(IParam parameters)
 {
-	mParameters.lenght= parameters.lenght; 
+	mParameters.length= parameters.length; 
 	mParameters.maxBranches = parameters.maxBranches; 
 	mParameters.maxLvl = parameters.maxLvl;
-
-
-
 	makeinit();
-	
 	makeTree();
-	
  //13 frames***
 
 
@@ -32,10 +27,7 @@ void Tree::makeinit()
 
 void Tree::makeTree()
 {
-	makeNode(pHead);
-	
-	
-	
+	makeNode();	
 	
 	// to be placed in separate function 
 	std::fstream fs;
@@ -44,17 +36,11 @@ void Tree::makeTree()
 	fs.close();
 }
 
-void Tree::makeNode(Node* currentNode)
+void Tree::makeNode()
 {
-	
-	if (currentNode == nullptr) {// for head pointer, initializing tree
-	
-		currentNode = new Node(&mParameters);
-	
+	if (pHead == nullptr) {// for head pointer, initializing tree
+		pHead = new Node(&mParameters,1);
 	}
-
-	
-
 }
 
 int Tree::getLevel()

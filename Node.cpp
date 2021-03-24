@@ -1,12 +1,13 @@
 #include "Node.h"
 
-Node::Node(IParam* parameters)
+
+Node::Node(IParam* parameters, int level)
 {
 	int numberofkids = rand() % (parameters->maxBranches - parameters->minBranches) + parameters->minBranches; // generates random number for branches
-
+	this->mLevel = level;
 	if (this->getlevel() < parameters->maxLvl) {
-	for (int i = 0; i < numberofkids; i++) {
-		this->setKids(new Node(TreeParameters));
+		for (int i = 0; i < numberofkids; i++) {
+			this->setKids(new Node(parameters, this->getlevel() + 1));
 		}
 
 	}

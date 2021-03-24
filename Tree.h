@@ -26,7 +26,7 @@ public:
     ~Tree();
     void makeinit();
     void makeTree();
-    void makeNode(Node* currentNode);
+    void makeNode();
     int getLevel();
 private:
     Node* pHead = nullptr;
