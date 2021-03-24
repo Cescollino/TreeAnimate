@@ -57,3 +57,9 @@ void Node::setLevel(int level)
 {
 	mLevel = level;
 }
+
+void Node::setPosition(int x, int y)
+{
+  mPosition.x=x;
+  mPosition.y=y;
+}

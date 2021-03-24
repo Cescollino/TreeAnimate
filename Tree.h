@@ -28,6 +28,7 @@ public:
     void makeTree();
     void makeNode();
     int getLevel();
+    position init{};
 private:
     Node* pHead = nullptr;
     IParam mParameters{};

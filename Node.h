@@ -26,6 +26,7 @@ public:
     void setPrevious(Node* Parent);
     int getlevel();
     void setLevel(int level);
+    void setPosition(int x, int y);
 
 private:
 
