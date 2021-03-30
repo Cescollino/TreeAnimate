@@ -5,8 +5,8 @@ Tree::Tree(IParam parameters)
 	mParameters.length= parameters.length; 
 	mParameters.maxBranches = parameters.maxBranches; 
 	mParameters.maxLvl = parameters.maxLvl;
-	init.x = 250;
-	init.y = 250;
+	//init.x = 250;
+	//init.y = 250;
 	makeinit();
 	makeTree();
  //13 frames***

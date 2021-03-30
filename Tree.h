@@ -9,15 +9,10 @@
 #include <string>
 #include "Node.h"
 #include <math.h>
+#include "Structures.h"
 
+//class Node; // utile juste pour éviter une déclaration récursive
 
-class Node; // utile juste pour éviter une déclaration récursive
-struct IParam {
-    int maxLvl{};
-    int maxBranches{};
-    const int minBranches{2};
-    float length{}; 
-};
 
 class Tree {
   
@@ -28,10 +23,12 @@ public:
     void makeTree();
     void makeNode();
     int getLevel();
-    position init{};
+    
 private:
+    position init{};
     Node* pHead = nullptr;
     IParam mParameters{};
+
 protected:
 };
 #endif

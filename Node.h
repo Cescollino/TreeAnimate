@@ -6,14 +6,11 @@
 #include <fstream> 
 #include <string>
 #include <list>
-#include "Tree.h"
+#include "Structures.h"
 class Tree;// utile juste pour éviter une déclaration récursive
 struct IParam;// utile juste pour éviter une déclaration récursive
 
-struct position {
-    int x{};
-    int y{};
-};
+
 
 class Node {
 
