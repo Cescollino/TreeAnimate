@@ -11,7 +11,6 @@
 #include <math.h>
 #include "Structures.h"
 
-//class Node; // utile juste pour éviter une déclaration récursive
 
 
 class Tree {
@@ -23,6 +22,7 @@ public:
     void makeTree();
     void makeNode();
     int getLevel();
+    void writeData();
     
 private:
     position init{};

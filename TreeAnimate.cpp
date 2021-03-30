@@ -25,7 +25,7 @@ int main()
     Parameters.maxLvl = std::stoi(NMax);
 
     Tree mytree(Parameters);
-
+    mytree.writeData();
     int a{};
 
 }
