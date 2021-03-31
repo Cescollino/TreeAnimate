@@ -23,7 +23,8 @@ public:
     void makeNode();
     int getLevel();
     void writeData();
-    
+    int wind(int frame);
+    void itterateTree(Node start);
 private:
     position init{};
     Node* pHead = nullptr;

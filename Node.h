@@ -19,17 +19,23 @@ public:
     ~Node();
     Node* getPrevious();
     std::list<Node*>* getKids(); 
-    void setKids(Node* Kid);
+    void setKids(Node* Kid, int branches);
     void setPrevious(Node* Parent);
     int getlevel();
     void setLevel(int level);
     void setPosition(int x, int y);
+    position getPosition();
+    int length();
+    int angle();
 
 private:
 
     position mPosition{};
     Node* mPrevious=nullptr; // This can only contain one pointer
-    std::list<Node*> mKids = {}; // this points to a table of Nodes
+    
+    
+    std::list<Node*> mKids = {}; // this points to a table of Nodes 
+                                // ************//to replace
     int mLevel { }; // determines the level of the node inside a tree
     IParam* TreeParameters = nullptr; // points to the parameters of the tree
 

@@ -5,8 +5,8 @@ Tree::Tree(IParam parameters)
 	mParameters.length= parameters.length; 
 	mParameters.maxBranches = parameters.maxBranches; 
 	mParameters.maxLvl = parameters.maxLvl;
-	init.x = 250;
-	init.y = 250;
+	init.x = initX;
+	init.y = initY;
 	makeinit();
 	makeTree();
 
@@ -60,6 +60,8 @@ int Tree::getLevel()
 	}
 	return level;	
 }
+
+
 		
 void Tree :: writeData()
 {
@@ -70,10 +72,48 @@ void Tree :: writeData()
 	if (fs.is_open())
 	{
 		fs << "FRAME" << std::endl;
+		fs << "dlin" << " " <<init.x <<" " << init.y << " " <<pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
 
-
-		fs << "my text here!" << std::endl;
 		
 	}
 	fs.close();
+}
+
+int Tree::wind(int frame)
+{
+	int offset{};
+	offset = 0.5 * sin(5 / 2 * frame) + 0.5 * cos(3 / 2 * (frame - (acos(-1))));
+	return 5*offset;
+}
+
+
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+// to finish once we got a list
+void Tree::itterateTree(Node start)
+{
+	Node cur = start;
+	while (cur.getKids() != nullptr)
+	{
+		//std::list a= cur.getKids();
+		//itterateTree(cur.getKids()->front() );
+		//itterateTree(cur.getKids()->front());
+	}
+
+	std::ofstream fs;
+	fs.open("Tree.sfa", std::ios::app);
+	if (fs.is_open())
+	{
+		//draw a line between the current position and the parent's position
+		fs << "dlin" << " " << cur.getPosition().x << " " << cur.getPosition().y << " " << 
+			cur.getPrevious()->getPosition().x << " " << cur.getPrevious()->getPosition().y << " " << std::endl;
+	}
+	fs.close();
+
 }
