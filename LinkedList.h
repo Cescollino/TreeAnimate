@@ -9,7 +9,7 @@
 typedef struct _nInst {
 
 	Node* node;
-	nInst* Next;	/* Un pointeur vers le prochain noeud */
+	_nInst* Next;	/* Un pointeur vers le prochain noeud */
 } nInst;
 
 class LinkedList
