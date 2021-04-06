@@ -15,9 +15,6 @@ Node::Node(IParam* parameters, int level)
 
 Node::~Node()
 {
-	for (auto x : mKids){
-		delete x;
-	}
 }
 
 Node* Node::getPrevious()
@@ -31,7 +28,7 @@ Node* Node::getPrevious()
 	}
 }
 
-std::list<Node*>* Node::getKids()
+LinkedList* Node::getKids()
 {
 	return &mKids;
 }
@@ -53,8 +50,9 @@ void Node::setKids(Node* Kid, int branches)
 		 y = lenght * cos(angle);
 	}
 	Kid->setPosition(x,y);
-
-	mKids.insert(mKids.end(), Kid);
+	nInst AKid;
+	AKid.node = Kid;
+	mKids.Insert(AKid);
 	Kid->setLevel(this->getlevel() + 1);
 
 }

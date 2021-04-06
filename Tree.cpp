@@ -47,7 +47,7 @@ void Tree::makeNode()
 	}
 }
 
-int Tree::getLevel()
+/*int Tree::getLevel()
 {
 	int level{};
 	Node* cur;
@@ -59,7 +59,7 @@ int Tree::getLevel()
 	}
 	}
 	return level;	
-}
+}*/
 
 
 		
@@ -87,19 +87,10 @@ int Tree::wind(int frame)
 }
 
 
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-// to finish once we got a list
-void Tree::itterateTree(Node start)
+void Tree::iterateTree(Node* start)
 {
-	Node cur = start;
-	while (cur.getKids() != nullptr)
+	Node* cur = start;
+	while (cur->getKids() != nullptr)
 	{
 		//std::list a= cur.getKids();
 		//itterateTree(cur.getKids()->front() );
@@ -111,8 +102,8 @@ void Tree::itterateTree(Node start)
 	if (fs.is_open())
 	{
 		//draw a line between the current position and the parent's position
-		fs << "dlin" << " " << cur.getPosition().x << " " << cur.getPosition().y << " " << 
-			cur.getPrevious()->getPosition().x << " " << cur.getPrevious()->getPosition().y << " " << std::endl;
+		fs << "dlin" << " " << cur->getPosition().x << " " << cur->getPosition().y << " " << 
+			cur->getPrevious()->getPosition().x << " " << cur->getPrevious()->getPosition().y << " " << std::endl;
 	}
 	fs.close();
 

@@ -25,7 +25,7 @@ void LinkedList::deleteAll()
 
 bool LinkedList::Insert(nInst node)
 {
-	nInst * Cur, * Prev;
+	nInst * Cur;
 	nInst* NewNode = new (std::nothrow) nInst;
 	
 	*NewNode = node;
@@ -37,19 +37,18 @@ bool LinkedList::Insert(nInst node)
 	if (pHead == nullptr) {	// case where there are no nodes in the list	
 		pHead = NewNode;
 		Cur = pHead;
+		Cur->Next = nullptr;
 		return 0;
 		} 
 	else
 	{
 		Cur = pHead;      // case where there is already a node in the list 
-		Prev = nullptr;
-
 		while (Cur->Next != nullptr) {
-			Prev = Cur;
-			Cur = Cur->Next;
+		Cur = Cur->Next;
 		}
 
 		Cur->Next = NewNode;
+		Cur->Next->Next = nullptr;
 	}
 	return 0;
 }

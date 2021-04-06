@@ -6,6 +6,7 @@
 #include <fstream> 
 #include <string>
 #include <list>
+#include "LinkedList.h"
 #include "Structures.h"
 class Tree;// utile juste pour éviter une déclaration récursive
 struct IParam;// utile juste pour éviter une déclaration récursive
@@ -18,7 +19,7 @@ public:
     Node(IParam* parameters, int level);
     ~Node();
     Node* getPrevious();
-    std::list<Node*>* getKids(); 
+    LinkedList* getKids(); 
     void setKids(Node* Kid, int branches);
     void setPrevious(Node* Parent);
     int getlevel();
@@ -34,7 +35,7 @@ private:
     Node* mPrevious=nullptr; // This can only contain one pointer
     
     
-    std::list<Node*> mKids = {}; // this points to a table of Nodes 
+    LinkedList mKids = {}; // this points to a table of Nodes 
                                 // ************//to replace
     int mLevel { }; // determines the level of the node inside a tree
     IParam* TreeParameters = nullptr; // points to the parameters of the tree
