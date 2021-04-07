@@ -3,5 +3,3 @@ INIT
 Media_SetBrushColor(SetParam(&Param, 3, 255, 255, 255, 0, 0, 0, 0, 0, NULL));
 Media_SetPenColor(SetParam(&Param, 3, 0, 0, 0, 0, 0, 0, 0, 0, NULL));
 Media_Clear(SetParam(&Param, 3, 255, 255, 255, 0, 0, 0, 0, 0, NULL));
-FRAME
-dlin 250 250 250 175 

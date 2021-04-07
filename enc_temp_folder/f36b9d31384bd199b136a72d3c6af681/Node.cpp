@@ -5,11 +5,11 @@ Node::Node(IParam* parameters, int level, Node* Parent)
 {
 	int numberofkids = rand() % (parameters->maxBranches - parameters->minBranches) + parameters->minBranches; // generates random number for branches
 	this->mLevel = level;
-	this->mPrevious = Parent; // THIS IS WRONG !!!!!!!! SEE SETKIDS() NULLPTR, SEE FIRST TRUNK NODE
+	this->mPrevious = Parent;
 	TreeParameters = parameters;
 	if (this->getlevel() < parameters->maxLvl) {
 		for (int i = 0; i < numberofkids; i++) {
-			this->setKids(new Node(parameters, this->getlevel() + 1, this),numberofkids);// CHECK PARENT NODE POINTER EMPTY 
+			this->setKids(new Node(parameters, this->getlevel() + 1, this),numberofkids);
 			
 		}
 
