@@ -8,6 +8,7 @@ Node::Node(IParam* parameters, int level)
 	if (this->getlevel() < parameters->maxLvl) {
 		for (int i = 0; i < numberofkids; i++) {
 			this->setKids(new Node(parameters, this->getlevel() + 1),numberofkids);
+			
 		}
 
 	}
@@ -50,6 +51,7 @@ void Node::setKids(Node* Kid, int branches)
 		 y = lenght * cos(angle);
 	}
 	Kid->setPosition(x,y);
+	Kid->setPrevious(this);
 	nInst AKid;
 	AKid.node = Kid;
 	mKids.Insert(AKid);
