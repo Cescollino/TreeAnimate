@@ -25,9 +25,7 @@ void Tree::makeinit()
 	std::ofstream outfile("Tree.sfa"); // generates sfa file
 	outfile << "Sto and Mario's tree" << std::endl;
 	outfile << "INIT" << std::endl;
-	outfile << "Media_SetBrushColor(SetParam(&Param, 3, 255, 255, 255, 0, 0, 0, 0, 0, NULL));" << std::endl;
-	outfile << "Media_SetPenColor(SetParam(&Param, 3, 0, 0, 0, 0, 0, 0, 0, 0, NULL));" << std::endl;
-	outfile << "Media_Clear(SetParam(&Param, 3, 255, 255, 255, 0, 0, 0, 0, 0, NULL));" << std::endl;
+	outfile << "eras 255 255 255" << std::endl;
 	
 	outfile.close();
 

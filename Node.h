@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream> 
 #include <string>
-#include <list>
 #include "LinkedList.h"
 #include "Structures.h"
 class Tree;// utile juste pour éviter une déclaration récursive
