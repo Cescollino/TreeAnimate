@@ -53,4 +53,9 @@ bool LinkedList::Insert(nInst node)
 	return 0;
 }
 
+nInst* LinkedList::Head()
+{
+	return pHead;
+}
+
 

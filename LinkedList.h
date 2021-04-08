@@ -19,7 +19,7 @@ public:
 	~LinkedList();
 	void deleteAll();
 	bool Insert(nInst node);// appends a node to the end of the list
-
+	nInst* Head();
 
 private:
 	nInst* pHead;

@@ -74,9 +74,13 @@ void Tree :: writeData()
 		fs << "FRAME" << std::endl;
 		fs << "dlin" << " " <<init.x <<" " << init.y << " " <<pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
 
-		
 	}
 	fs.close();
+	nInst head;
+	head.node = pHead;
+	head.Next = nullptr;
+	iterateTree(&head);
+
 }
 
 int Tree::wind(int frame)
@@ -87,23 +91,33 @@ int Tree::wind(int frame)
 }
 
 
-void Tree::iterateTree(Node* start)
+void Tree::iterateTree(nInst* start)
 {
-	Node* cur = start;
-	while (cur->getKids() != nullptr)
-	{
-		//std::list a= cur.getKids();
-		//itterateTree(cur.getKids()->front() );
-		//itterateTree(cur.getKids()->front());
-	}
-
+	nInst* cur = start;
+	nInst* kid = nullptr;
 	std::ofstream fs;
 	fs.open("Tree.sfa", std::ios::app);
 	if (fs.is_open())
 	{
-		//draw a line between the current position and the parent's position
-		fs << "dlin" << " " << cur->getPosition().x << " " << cur->getPosition().y << " " << 
-			cur->getPrevious()->getPosition().x << " " << cur->getPrevious()->getPosition().y << " " << std::endl;
+		while (cur != nullptr)// here's the problem
+		{
+			kid = cur->node->getKids()->Head();
+
+			while (kid != nullptr)
+			{	
+				//draw a line between the (N) kid and the parent's position
+				fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
+				kid->node->getPosition().x << " " <<kid->node->getPosition().y << " " << std::endl;
+
+				iterateTree(kid);
+				kid = kid->Next;
+
+			}
+			cur = cur->Next;
+			
+		}
+
+		
 	}
 	fs.close();
 
