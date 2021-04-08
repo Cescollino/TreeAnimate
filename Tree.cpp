@@ -117,6 +117,7 @@ void Tree::iterateTree(nInst* start)
 
 		
 	}
+
 	fs.close();
 
 }
