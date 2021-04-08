@@ -48,8 +48,8 @@ void Node::setKids(Node* Kid, int branches)
 	if (this->mPrevious != nullptr) {
 		int lenght = TreeParameters->length * this->length();
 		int parentAngle = this->angle();
-		 x = lenght * sin(angle + parentAngle));
-		 y = lenght * cos(angle + parentAngle));
+		 x = lenght * sin(angle + parentAngle);
+		 y = lenght * cos(angle + parentAngle);
 	}
 	else {
 		int lenght = initY - mPosition.y;
