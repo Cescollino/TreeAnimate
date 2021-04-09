@@ -31,6 +31,7 @@ int main()
     if (fs.is_open())
     {
         fs << "END";
+        fs << "FRAME";
     }
     fs.close();
     int a{};

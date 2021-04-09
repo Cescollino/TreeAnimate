@@ -19,7 +19,7 @@ public:
     ~Node();
     Node* getPrevious();
     LinkedList* getKids(); 
-    void setKids(Node* Kid, int branches);
+    void setKids(Node* Kid, int branches, int whichKid);
     void setPrevious(Node* Parent);
     int getlevel();
     void setLevel(int level);
