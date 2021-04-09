@@ -40,7 +40,11 @@ void Tree::makeTree()
 void Tree::makeNode()
 {
 	if (pHead == nullptr) {// for head pointer, initializing tree
-		pHead = new Node(&mParameters,1, nullptr);
+			position headPosition;
+			headPosition.x = 250;
+			headPosition.y = 175;
+
+		pHead = new Node(&mParameters,1, nullptr,headPosition);
 		//pHead->setPosition(250, 175);
 	}
 }

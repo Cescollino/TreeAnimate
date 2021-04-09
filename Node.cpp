@@ -1,12 +1,8 @@
 #include "Node.h"
 
 
-Node::Node(IParam* parameters, int level, Node* Parent)
+Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 {
-	if (Parent == nullptr) {
-		this->setPosition(250, 175);
-	}
-	
 	int numberofkids{};
 	if (parameters->maxBranches == parameters->minBranches) {
 	numberofkids = parameters->minBranches;
@@ -17,9 +13,12 @@ Node::Node(IParam* parameters, int level, Node* Parent)
 	this->mLevel = level;
 	this->setPrevious(Parent);
 	TreeParameters = parameters;
+	mPosition = positionKid;
 	if (this->getlevel() < parameters->maxLvl) {
 		for (int i = 0; i < numberofkids; i++) {
-			this->setKids(new Node(parameters, this->getlevel() + 1, this),numberofkids, i+1);// CHECK PARENT NODE POINTER EMPTY 
+			position thisposition = PositionKids(numberofkids, i + 1);
+		
+			this->setKids(new Node(parameters, this->getlevel() + 1, this,thisposition),numberofkids, i+1);// CHECK PARENT NODE POINTER EMPTY 
 			
 		}
 
@@ -49,27 +48,8 @@ LinkedList* Node::getKids()
 
 void Node::setKids(Node* Kid, int branches, int whichKid)// problem here, always mPrevious==nullptr...
 {
-	int x{};
-	int y{};
-	int angle = 180 / (branches+1);
-
-	Kid->setPrevious(this);
 	
-	if (this->mPrevious != nullptr) {
-		int lenght = TreeParameters->length * this->length();
-		int parentAngle = this->angle();
-		 x = lenght * cos(degToRad((angle*whichKid + parentAngle) + 180)) + mPrevious->mPosition.x;
-		 y = lenght * sin(degToRad((angle*whichKid + parentAngle) + 180)) + mPrevious->mPosition.y;
-		 int a{};
-	}
-	else {
-		int lenght = initY - mPosition.y;
-		 x = lenght * cos(degToRad((angle*whichKid)+180))+250;
-		 y = lenght * sin(degToRad((angle*whichKid)+180))+175;
 
-	}
-
-	Kid->setPosition(x,y);	
 	nInst AKid;
 	AKid.node = Kid;
 	mKids.Insert(AKid);
@@ -103,6 +83,32 @@ position Node::getPosition()
 	return mPosition;
 }
 
+position Node::PositionKids(int branches, int whichKid)
+{
+	int x{};
+	int y{};
+	int Pangle = 180 / (branches + 1);
+
+	if (mLevel > 1 ) {
+		int lenght = TreeParameters->length * length();
+		int parentAngle = angle();
+
+		x = lenght * cos(degToRad(180+(Pangle * whichKid + parentAngle))) + mPosition.x;//must change positioning to fit tree shape
+		y = lenght * sin(degToRad(180+(Pangle * whichKid + parentAngle))) + mPosition.y;
+		int a{};
+	}
+	else {
+		int lenght = TreeParameters->length*(initY - mPosition.y);
+		x = lenght * cos(degToRad((Pangle * whichKid) + 180)) + 250;
+		y = lenght * sin(degToRad((Pangle * whichKid) + 180)) + 175;
+	}
+
+	position myposition;
+	myposition.x = x;
+	myposition.y = y;
+	return myposition;
+}
+
 
 
 int Node::length()
@@ -110,7 +116,7 @@ int Node::length()
 	position pos1= mPrevious->getPosition();
 	int length{};
 
-	length=sqrt( (pos1.x - mPosition.x)^2 + (pos1.y-mPosition.y)^2);
+	length= sqrt( (pos1.x - mPosition.x) * (pos1.x - mPosition.x) + (pos1.y - mPosition.y)* (pos1.y - mPosition.y));
 
 	return length;
 }
@@ -118,7 +124,11 @@ int Node::angle()
 {
 	position pos1 = mPrevious->getPosition();
 	int angle{};
-	angle = radToDeg(atan((pos1.y - mPosition.y)/ (pos1.x - mPosition.x)));
-
+	if (pos1.x != mPosition.x) {
+		angle = radToDeg(atan((pos1.y - mPosition.y) / (pos1.x - mPosition.x)));
+	}
+	else {
+		angle = 0;
+	}
 	return angle;
 }

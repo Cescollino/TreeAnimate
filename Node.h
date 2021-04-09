@@ -15,7 +15,7 @@ struct IParam;// utile juste pour éviter une déclaration récursive
 class Node {
 
 public:
-    Node(IParam* parameters, int level, Node* Parent);
+    Node(IParam* parameters, int level, Node* Parent, position positionKid);
     ~Node();
     Node* getPrevious();
     LinkedList* getKids(); 
@@ -25,8 +25,10 @@ public:
     void setLevel(int level);
     void setPosition(int x, int y);
     position getPosition();
+    position PositionKids(int branches,int whichKid);
     int length();
     int angle();
+
 
 private:
 
