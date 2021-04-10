@@ -70,17 +70,16 @@ void Tree :: writeData()
 	head.Next = nullptr;
 	for (int i{}; i < 13; i++)
 	{
+		pHead->setPosition(pHead->getPosition().x + wind(i) / 2, pHead->getPosition().y);
 		iterateTree(&head, i);
 		//stuff to be written after each frame
 		std::ofstream fs;
 		fs.open("Tree.sfa", std::ios::app);
 		if (fs.is_open())
 		{
-			fs << "wait 2000" << std::endl;
+			fs << "wait 500" << std::endl;
 			fs << "eras 255 255 255." << std::endl;
 			fs << "FRAME" << std::endl;
-			//draws the initial line, so bottom to pHead
-			fs << "dlin" << " " << init.x << " " << init.y << " " << pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
 			fs.close();
 		}
 	}
@@ -112,17 +111,16 @@ void Tree::iterateTree(nInst* start, int frame)
 		if (cur != nullptr)
 		{
 			kid = cur->node->getKids()->Head();
-
+			
+			//draws the initial line, so bottom to pHead
+			fs << "dlin" << " " << init.x << " " << init.y << " " << pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
 			while (kid != nullptr)
 			{	
-				
 				
 				////////////cur->node->setPosition(cur->node->getPosition().x + cur->node->getlevel() * wind(frame),	cur->node->getPosition().y);
 				
 				kid->node->setPosition(kid->node->getPosition().x + kid->node->getlevel() * wind(frame),	kid->node->getPosition().y );
-				pHead->setPosition(pHead->getPosition().x + wind(frame)/2, pHead->getPosition().y);
-				
-				
+								
 					//draw a line between the (N) kid and the parent's position
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;
@@ -131,14 +129,10 @@ void Tree::iterateTree(nInst* start, int frame)
 				iterateTree(kid, frame);
 				kid = kid->Next;
 				
-
 			}
-			
-			
 			
 		}
 
-		
 	}
 	fs.close();
 
