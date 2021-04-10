@@ -70,10 +70,10 @@ void Tree :: writeData()
 	head.Next = nullptr;
 	for (int i{}; i < 13; i++)
 	{
-		float newAngle = asin(wind(i) / (250 - 175));
-		float newX = (250 - 175) * sin(newAngle);
-		float newY = (250 - 175) * cos(newAngle);
-		pHead->setPosition(pHead->getPosition().x + newX, pHead->getPosition().y+ ((250 - 175) - newY));
+		float newAngle = asin((0.5*wind(i)) / (init.y-pHead->getPosition().y));
+		float newX = (init.y - pHead->getPosition().y) * sin(newAngle);
+		float newY = (init.y - pHead->getPosition().y) * cos(newAngle);
+		pHead->setPosition(pHead->getPosition().x + newX, pHead->getPosition().y+ ((init.y - pHead->getPosition().y) - newY));
 		iterateTree(&head, i);
 		//stuff to be written after each frame
 		std::ofstream fs;
