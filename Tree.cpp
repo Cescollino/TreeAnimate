@@ -70,7 +70,10 @@ void Tree :: writeData()
 	head.Next = nullptr;
 	for (int i{}; i < 13; i++)
 	{
-		pHead->setPosition(pHead->getPosition().x + wind(i) / 2, pHead->getPosition().y);
+		float newAngle = asin(wind(i) / (250 - 175));
+		float newX = (250 - 175) * sin(newAngle);
+		float newY = (250 - 175) * cos(newAngle);
+		pHead->setPosition(pHead->getPosition().x + newX, pHead->getPosition().y+ ((250 - 175) - newY));
 		iterateTree(&head, i);
 		//stuff to be written after each frame
 		std::ofstream fs;
@@ -87,13 +90,13 @@ void Tree :: writeData()
 
 }
 
-int Tree::wind(int frame)
+float Tree::wind(int frame)
 {
 	if (frame!=0)
 	{
 		float offset{};
 		offset = 0.5 * sin(5 / 2 * frame) + 0.5 * cos(3 / 2 * (frame - (acos(-1))));
-		return 5 * offset;
+		return 15 * offset;
 	}
 	else { return 0; }
 	

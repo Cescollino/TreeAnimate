@@ -22,7 +22,7 @@ public:
     void makeTree();
     void makeNode();
     void writeData();
-    int wind(int frame);
+    float wind(int frame);
     void iterateTree(nInst* start, int frame);
 private:
     position init{};
