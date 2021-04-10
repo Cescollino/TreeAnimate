@@ -30,8 +30,9 @@ int main()
     fs.open("Tree.sfa", std::ios::app);
     if (fs.is_open())
     {
-        fs << "END";
         fs << "FRAME";
+        fs << "END";
+      
     }
     fs.close();
     int a{};

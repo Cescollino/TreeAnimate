@@ -87,20 +87,20 @@ position Node::PositionKids(int branches, int whichKid)
 {
 	int x{};
 	int y{};
-	int Pangle = 180 / (branches + 1);
+	int bAngle = 180 / (branches + 1);
 
 	if (mLevel > 1 ) {
 		int lenght = TreeParameters->length * length();
 		int parentAngle = angle();
 
-		x = lenght * cos(degToRad(180+(Pangle * whichKid + parentAngle))) + mPosition.x;//must change positioning to fit tree shape
-		y = lenght * sin(degToRad(180+(Pangle * whichKid + parentAngle))) + mPosition.y;
+		x = lenght * cos(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.x;//must change positioning to fit tree shape
+		y = lenght * sin(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.y;
 		int a{};
 	}
 	else {
 		int lenght = TreeParameters->length*(initY - mPosition.y);
-		x = lenght * cos(degToRad((Pangle * whichKid) + 180)) + 250;
-		y = lenght * sin(degToRad((Pangle * whichKid) + 180)) + 175;
+		x = lenght * cos(degToRad((bAngle * whichKid) + 180)) + 250;
+		y = lenght * sin(degToRad((bAngle * whichKid) + 180)) + 175;
 	}
 
 	position myposition;
@@ -123,12 +123,15 @@ int Node::length()
 int Node::angle()
 {
 	position pos1 = mPrevious->getPosition();
-	int angle{};
+	float angle{};
+	
 	if (pos1.x != mPosition.x) {
-		angle = radToDeg(atan((pos1.y - mPosition.y) / (pos1.x - mPosition.x)));
+		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));
+		int bla{};
+		
 	}
 	else {
-		angle = 0;
+		angle = 90;
 	}
 	return angle;
 }
