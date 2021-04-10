@@ -21,10 +21,9 @@ public:
     void makeinit();
     void makeTree();
     void makeNode();
-    int getLevel();
     void writeData();
     int wind(int frame);
-    void iterateTree(nInst* start);
+    void iterateTree(nInst* start, int frame);
 private:
     position init{};
     Node* pHead = nullptr;

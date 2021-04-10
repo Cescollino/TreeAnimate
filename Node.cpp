@@ -135,3 +135,13 @@ int Node::angle()
 	}
 	return angle;
 }
+
+void Node::setDrawn(bool done)
+{
+	mIsDrawn = done;
+}
+
+bool Node::getDrawn()
+{
+	return mIsDrawn;
+}

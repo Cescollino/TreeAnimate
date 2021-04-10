@@ -29,12 +29,16 @@ public:
     int length();
     int angle();
 
+    void setDrawn(bool done);
+    bool getDrawn();
+
+
 
 private:
 
     position mPosition{};
     Node* mPrevious=nullptr; // This can only contain one pointer
-    
+    bool mIsDrawn{};
     
     LinkedList mKids = {}; // this points to a table of Nodes 
                                 // ************//to replace
