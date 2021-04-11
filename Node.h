@@ -39,7 +39,7 @@ private:
     position mPosition{};
     Node* mPrevious=nullptr; // This can only contain one pointer
     bool mIsDrawn{};
-    
+    int mLength{};
     LinkedList mKids = {}; // this points to a table of Nodes 
                                 // ************//to replace
     int mLevel { }; // determines the level of the node inside a tree

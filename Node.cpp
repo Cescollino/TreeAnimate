@@ -4,6 +4,8 @@
 Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 {
 	int numberofkids{};
+
+
 	if (parameters->maxBranches == parameters->minBranches) {
 	numberofkids = parameters->minBranches;
 	}
@@ -12,8 +14,10 @@ Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 	}
 	this->mLevel = level;
 	this->setPrevious(Parent);
+
 	TreeParameters = parameters;
 	mPosition = positionKid;
+	if (mPrevious != nullptr) length();
 	if (this->getlevel() < parameters->maxLvl) {
 		for (int i = 0; i < numberofkids; i++) {
 			position thisposition = PositionKids(numberofkids, i + 1);
@@ -113,12 +117,23 @@ position Node::PositionKids(int branches, int whichKid)
 
 int Node::length()
 {
-	position pos1= mPrevious->getPosition();
-	int length{};
+	if (mLength == 0) {
 
-	length= sqrt( (pos1.x - mPosition.x) * (pos1.x - mPosition.x) + (pos1.y - mPosition.y)* (pos1.y - mPosition.y));
+		position pos1 = mPrevious->getPosition();
+		int length{};
 
-	return length;
+		length = sqrt((pos1.x - mPosition.x) * (pos1.x - mPosition.x) + (pos1.y - mPosition.y) * (pos1.y - mPosition.y));
+		mLength = length;
+		std::cout << length<< "\n";
+		return length;
+
+	}
+	else
+	{
+		return mLength;
+	}
+
+
 }
 int Node::angle()
 {
