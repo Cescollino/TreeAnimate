@@ -29,8 +29,6 @@ public:
     int length();
     int angle();
 
-    void setDrawn(bool done);
-    bool getDrawn();
     position offsetKids( int bAngle, int whichKid, float angleOffset);
     int getSpot();
     float getBranchA();
@@ -39,8 +37,7 @@ private:
 
     position mPosition{};
     Node* mPrevious=nullptr; // This can only contain one pointer
-    bool mIsDrawn{};
-    
+       
     LinkedList mKids = {}; // this points to a table of Nodes 
     float mBranchAngle{};
     int mListSpot{};

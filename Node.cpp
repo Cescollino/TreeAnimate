@@ -132,15 +132,7 @@ int Node::angle()
 	return angle;
 }
 
-void Node::setDrawn(bool done)
-{
-	mIsDrawn = done;
-}
 
-bool Node::getDrawn()
-{
-	return mIsDrawn;
-}
 
 position Node::offsetKids( int bAngle, int whichKid, float angleOffset)
 {
