@@ -31,8 +31,9 @@ public:
 
     void setDrawn(bool done);
     bool getDrawn();
-
-
+    position offsetKids( int bAngle, int whichKid, float angleOffset);
+    int getSpot();
+    float getBranchA();
 
 private:
 
@@ -41,7 +42,8 @@ private:
     bool mIsDrawn{};
     
     LinkedList mKids = {}; // this points to a table of Nodes 
-                                // ************//to replace
+    float mBranchAngle{};
+    int mListSpot{};
     int mLevel { }; // determines the level of the node inside a tree
     IParam* TreeParameters = nullptr; // points to the parameters of the tree
 

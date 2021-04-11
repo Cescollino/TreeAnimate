@@ -74,6 +74,8 @@ void Tree :: writeData()
 		float newX = (init.y - pHead->getPosition().y) * sin(newAngle);
 		float newY = (init.y - pHead->getPosition().y) * cos(newAngle);
 		pHead->setPosition(pHead->getPosition().x + newX, pHead->getPosition().y+ ((init.y - pHead->getPosition().y) - newY));
+		
+		
 		iterateTree(&head, i);
 		//stuff to be written after each frame
 		std::ofstream fs;
@@ -107,6 +109,9 @@ void Tree::iterateTree(nInst* start, int frame)
 {
 	nInst* cur = start;
 	nInst* kid = nullptr;
+	int whichKid{};
+	float bAngle{}; 
+	position newPosition{};
 	std::ofstream fs;
 	fs.open("Tree.sfa", std::ios::app);
 	if (fs.is_open())
@@ -120,9 +125,14 @@ void Tree::iterateTree(nInst* start, int frame)
 			while (kid != nullptr)
 			{	
 				
-				////////////cur->node->setPosition(cur->node->getPosition().x + cur->node->getlevel() * wind(frame),	cur->node->getPosition().y);
-				
-				kid->node->setPosition(kid->node->getPosition().x + kid->node->getlevel() * wind(frame),	kid->node->getPosition().y );
+				float newAngle = asin((wind(frame)) / kid->node->length());
+				//float newX = kid->node->length() * sin(newAngle);
+				//float newY = kid->node->length() * cos(newAngle);
+				//pHead->setPosition(pHead->getPosition().x + newX, pHead->getPosition().y + ((init.y - pHead->getPosition().y) - newY));
+				whichKid=kid->node->getSpot();
+				bAngle = kid->node->getBranchA();
+				newPosition= kid->node->offsetKids(bAngle, whichKid, false);
+				kid->node->setPosition(newPosition.x , newPosition.y);
 								
 					//draw a line between the (N) kid and the parent's position
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<

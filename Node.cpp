@@ -18,7 +18,7 @@ Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 		for (int i = 0; i < numberofkids; i++) {
 			position thisposition = PositionKids(numberofkids, i + 1);
 		
-			this->setKids(new Node(parameters, this->getlevel() + 1, this,thisposition),numberofkids, i+1);// CHECK PARENT NODE POINTER EMPTY 
+			this->setKids(new Node(parameters, this->getlevel() + 1, this,thisposition),numberofkids, i+1); 
 			
 		}
 
@@ -46,7 +46,7 @@ LinkedList* Node::getKids()
 	return &mKids;
 }
 
-void Node::setKids(Node* Kid, int branches, int whichKid)// problem here, always mPrevious==nullptr...
+void Node::setKids(Node* Kid, int branches, int whichKid)
 {
 	
 
@@ -87,25 +87,21 @@ position Node::PositionKids(int branches, int whichKid)
 {
 	int x{};
 	int y{};
-	int bAngle = 180 / (branches + 1);
+	float bAngle = 180 / (branches + 1);
+	mBranchAngle = bAngle;
+	mListSpot = whichKid;
+	position myposition;
 
 	if (mLevel > 1 ) {
-		int lenght = TreeParameters->length * length();
-		int parentAngle = angle();
-
-		x = lenght * cos(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.x;//must change positioning to fit tree shape
-		y = lenght * sin(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.y;
-		int a{};
+		myposition= offsetKids(bAngle, whichKid, false);
+		
 	}
 	else {
 		int lenght = TreeParameters->length*(initY - mPosition.y);
-		x = lenght * cos(degToRad((bAngle * whichKid) + 180)) + 250;
-		y = lenght * sin(degToRad((bAngle * whichKid) + 180)) + 175;
+		myposition.x = lenght * cos(degToRad((bAngle * whichKid) + 180)) + initX;
+		myposition.y = lenght * sin(degToRad((bAngle * whichKid) + 180)) + 175;
 	}
 
-	position myposition;
-	myposition.x = x;
-	myposition.y = y;
 	return myposition;
 }
 
@@ -145,3 +141,25 @@ bool Node::getDrawn()
 {
 	return mIsDrawn;
 }
+
+position Node::offsetKids( int bAngle, int whichKid, float angleOffset)
+{
+	position newPos{};
+	int lenght = TreeParameters->length * length();
+	int parentAngle = angle();
+	
+	newPos.x = lenght * cos(degToRad(90 + parentAngle + radToDeg(angleOffset) +(bAngle * whichKid))) + mPosition.x;//must change positioning to fit tree shape
+	newPos.y = lenght * sin(degToRad(90 + parentAngle + radToDeg(angleOffset) +(bAngle * whichKid))) + mPosition.y;
+	return newPos;
+}
+
+int Node::getSpot()
+{
+	return mListSpot;
+}
+
+float Node::getBranchA()
+{
+	return mBranchAngle;
+}
+

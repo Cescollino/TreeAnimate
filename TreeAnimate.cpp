@@ -28,12 +28,7 @@ int main()
     mytree.writeData();
     std::ofstream fs;
     fs.open("Tree.sfa", std::ios::app);
-    if (fs.is_open())
-    {
-        
-        fs << "END";
-      
-    }
+    if (fs.is_open())   {  fs << "END";    }
     fs.close();
     int a{};
 
