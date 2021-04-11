@@ -119,11 +119,8 @@ void Tree::iterateTree(nInst* start, int frame)
 			fs << "dlin" << " " << init.x << " " << init.y << " " << pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
 			while (kid != nullptr)
 			{	
-			//	if (frame == 0)kid->node->length();
-			////////////cur->node->setPosition(cur->node->getPosition().x + cur->node->getlevel() * wind(frame),	cur->node->getPosition().y);
-			//	kid->node->setPosition(kid->node->getPosition().x + kid->node->getlevel() * wind(frame),	kid->node->getPosition().y );
-			
-			/*	int realAngle = kid->node->angle();
+		
+				int realAngle = kid->node->angle();
 				int realX = abs(cos(degToRad(realAngle))*kid->node->length());// gets us the length of x value before being affected by the wind
 				
 				float topacos = (wind(frame) + realX);
@@ -146,7 +143,7 @@ void Tree::iterateTree(nInst* start, int frame)
 				int kidx = kid->node->getPrevious()->getPosition().x - kid->node->length() * cos(degToRad(realAngle));
 				int kidy = kid->node->getPrevious()->getPosition().y - kid->node->length() * sin(degToRad(realAngle));
 				kid->node->setPosition(kidx,kidy);
-				*/
+				
 					//draw a line between the (N) kid and the parent's position
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;

@@ -41,8 +41,8 @@ private:
     bool mIsDrawn{};
     int mLength{};
     LinkedList mKids = {}; // this points to a table of Nodes 
-                                // ************//to replace
-    int mLevel { }; // determines the level of the node inside a tree
+    float mAngle{};
+    int mLevel {}; // determines the level of the node inside a tree
     IParam* TreeParameters = nullptr; // points to the parameters of the tree
 
 protected:
