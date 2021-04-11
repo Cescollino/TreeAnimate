@@ -121,9 +121,33 @@ void Tree::iterateTree(nInst* start, int frame)
 			{	
 				
 				////////////cur->node->setPosition(cur->node->getPosition().x + cur->node->getlevel() * wind(frame),	cur->node->getPosition().y);
+
+
+			//	kid->node->setPosition(kid->node->getPosition().x + kid->node->getlevel() * wind(frame),	kid->node->getPosition().y );
+			
+				int realAngle = kid->node->angle();
+				int realX = abs(cos(degToRad(realAngle))*kid->node->length());// gets us the length of x value before being affected by the wind
+				int topacos = (wind(frame) + realX);
+			
+				int botacos = (kid->node->length());
+				if (topacos > botacos) {// ensures that hypotenuse is always bigger than one of the cathetes
+					topacos = botacos;
+				};
+				float newAngleRAD = acos(topacos/botacos);
+				newAngleRAD = newAngleRAD + (newAngleRAD*.1* kid->node->getlevel());
+				float newAngle{};
+				if (newAngleRAD < 0) {
+					float newAngle = radToDeg(newAngleRAD);
+				}
+		
+
+				newAngle = realAngle - newAngle;
+				realAngle = realAngle + newAngle;
 				
-				kid->node->setPosition(kid->node->getPosition().x + kid->node->getlevel() * wind(frame),	kid->node->getPosition().y );
-								
+				int kidx = kid->node->getPrevious()->getPosition().x - kid->node->length() * cos(degToRad(realAngle));
+				int kidy = kid->node->getPrevious()->getPosition().y - kid->node->length() * sin(degToRad(realAngle));
+				kid->node->setPosition(kidx,kidy);
+
 					//draw a line between the (N) kid and the parent's position
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;

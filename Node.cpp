@@ -127,11 +127,15 @@ int Node::angle()
 	
 	if (pos1.x != mPosition.x) {
 		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));
-		int bla{};
-		
+
 	}
 	else {
-		angle = 90;
+		if (pos1.y > mPosition.y) {
+			angle = 90;
+		}
+		else {
+			angle = 270;
+		}
 	}
 	return angle;
 }
