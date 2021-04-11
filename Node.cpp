@@ -122,7 +122,7 @@ int Node::angle()
 	float angle{};
 	
 	if (pos1.x != mPosition.x) {
-		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));
+		angle = radToDeg(atan2((pos1.y-mPosition.y), (  pos1.x- mPosition.x)));
 		int bla{};
 		
 	}
@@ -140,7 +140,7 @@ position Node::offsetKids( int bAngle, int whichKid, float angleOffset)
 	int lenght = TreeParameters->length * length();
 	int parentAngle = angle();
 	
-	newPos.x = lenght * cos(degToRad(90 + parentAngle + radToDeg(angleOffset) +(bAngle * whichKid))) + mPosition.x;//must change positioning to fit tree shape
+	newPos.x = lenght * cos(degToRad(90 + parentAngle + radToDeg(angleOffset) +(bAngle * whichKid))) + mPosition.x;//must change offset to fit tree shape
 	newPos.y = lenght * sin(degToRad(90 + parentAngle + radToDeg(angleOffset) +(bAngle * whichKid))) + mPosition.y;
 	return newPos;
 }

@@ -133,7 +133,7 @@ void Tree::iterateTree(nInst* start, int frame)
 				bAngle = kid->node->getBranchA();
 				newPosition= kid->node->offsetKids(bAngle, whichKid, false);
 				kid->node->setPosition(newPosition.x , newPosition.y);
-								
+							
 					//draw a line between the (N) kid and the parent's position
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;
