@@ -1,6 +1,7 @@
 #include "Node.h"
 
-
+//recursive function which creates all the kids of the kids of the kids once started
+//it randomizez the number of branches depensing on the user input
 Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 {
 	int numberofkids{};
@@ -12,28 +13,24 @@ Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 	else {
 	numberofkids = rand() % (parameters->maxBranches - parameters->minBranches) + parameters->minBranches; // generates random number for branches
 	}
-	this->mLevel = level;
-	this->setPrevious(Parent);
+	this->mLevel = level;			//makes sure to save its level
+	this->setPrevious(Parent);		//and its parent so it can go back later
 
-	TreeParameters = parameters;
-	mPosition = positionKid;
+	TreeParameters = parameters;	//and a pointer to the parameters given by the users to the kids can make kids
+	mPosition = positionKid;		//sets its position to what it has recieved from the parent
 	if (mPrevious != nullptr) {
-		angle();
-		length();
+		angle();					//calculates the angle of the branch and saves it in mAngle, every other time that "angle()" is called, that value will be returned instead of recalculating
+		length();					//calculates the length of the branch and saves it in mAngle, every other time that "length()" is called, that value will be returned
 	}
-	if (this->getlevel() < parameters->maxLvl ||length()>=3) {
-		for (int i = 0; i < numberofkids; i++) {
-			position thisposition = PositionKids(numberofkids, i + 1);
-		
-			this->setKids(new Node(parameters, this->getlevel() + 1, this,thisposition),numberofkids, i+1);// CHECK PARENT NODE POINTER EMPTY 
-			
+	if (this->getlevel() < parameters->maxLvl ) {	//max level set by user and bigger or equal than 3
+		for (int i = 0; i < numberofkids; i++) {				//goes through all the kids
+			position thisposition = PositionKids(numberofkids, i + 1); //will calculate the position of the kid with the offset depending on the ammount
+			this->setKids(new Node(parameters, this->getlevel() + 1, this,thisposition),numberofkids, i+1);
 		}
-
 	}
-	
 }
 
-Node::~Node()
+Node::~Node() //doesn't need much since the linked list will empty itself and its kids
 {
 }
 
@@ -53,10 +50,8 @@ LinkedList* Node::getKids()
 	return &mKids;
 }
 
-void Node::setKids(Node* Kid, int branches, int whichKid)// problem here, always mPrevious==nullptr...
+void Node::setKids(Node* Kid, int branches, int whichKid)		// creates the kid and inserts it in the linked list of kids
 {
-	
-
 	nInst AKid;
 	AKid.node = Kid;
 	mKids.Insert(AKid);
@@ -90,34 +85,36 @@ position Node::getPosition()
 	return mPosition;
 }
 
+//takes care of all the calculations required to position kids in function of the parent's position and the ammount of kids
 position Node::PositionKids(int branches, int whichKid)
 {
 	int x{};
 	int y{};
-	int bAngle = 180 / (branches + 1);
+	int bAngle = 180 / (branches + 1); 
 
 	if (mLevel > 1 ) {
-		int lenght = TreeParameters->length * length();
-		int parentAngle = angle();
+		int lenght = TreeParameters->length * length();		//recieves mLength, doesn't recalculate
+		int parentAngle = angle();							//recieves mAngle, doesn't recalculate
 
-		x = lenght * cos(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.x;//must change positioning to fit tree shape
+		x = lenght * cos(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.x; //must change positioning to fit tree shape
 		y = lenght * sin(degToRad(90 + parentAngle+ (bAngle * whichKid))) + mPosition.y;
 		int a{};
 	}
 	else {
-		int lenght = TreeParameters->length*(initY - mPosition.y);
-		x = lenght * cos(degToRad((bAngle * whichKid) + 180)) + 250;
-		y = lenght * sin(degToRad((bAngle * whichKid) + 180)) + 175;
+		int lenght = TreeParameters->length*(initY - mPosition.y);	 //only used for the head since it's straight	
+		x = lenght * cos(degToRad((bAngle * whichKid) + 180)) + 250; //offset thanks to pHead
+		y = lenght * sin(degToRad((bAngle * whichKid) + 180)) + 175; //offset thanks to pHead
 	}
 
-	position myposition;
+	position myposition; //excellent for troubleshooting
 	myposition.x = x;
 	myposition.y = y;
 	return myposition;
 }
 
 
-
+//compares the curent node position to its parent to find its length
+//first time it's run, it calculates it, then it simply returns the same value since it shouldn't vary regardless of wind
 int Node::length()
 {
 	if (mLength == 0) {
@@ -138,6 +135,9 @@ int Node::length()
 
 
 }
+
+//compares the curent node position to its parent to find its angle
+//first time it's run, it calculates it, then it simply returns the same value 
 int Node::angle()
 {
 	float angle{};
@@ -145,7 +145,7 @@ int Node::angle()
 	position pos1 = mPrevious->getPosition();
 
 	if (pos1.x != mPosition.x) {
-		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));//
+		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));
 
 	}
 	else {

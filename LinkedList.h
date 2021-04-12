@@ -4,14 +4,16 @@
 #include <iostream>
 #include <string>
 #include "Structures.h"
-class Node;
+class Node; //prevents circular referencing 
+//provides the two main variables of the list, next points to the next kid while node contains all its information
 typedef struct _nInst {
 
 	Node* node;
 	_nInst* Next;	/* Un pointeur vers le prochain noeud */
 } nInst;
 
-class LinkedList
+// class which creates a very basic linked list that is used for all the kids of each node
+class LinkedList 
 {
 
 public:
@@ -23,7 +25,7 @@ public:
 
 private:
 	nInst* pHead;
-protected:
+
 };
 
 #endif

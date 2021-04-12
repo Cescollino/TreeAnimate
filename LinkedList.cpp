@@ -10,6 +10,7 @@ LinkedList::~LinkedList()
 	this->deleteAll();
 }
 
+//goes to the head and itterates through all the nodes to delete them, once all the kids are done, so it the parent
 void LinkedList::deleteAll()
 {
 		nInst* tempnode;
@@ -23,6 +24,7 @@ void LinkedList::deleteAll()
 		if (pHead != nullptr) { pHead = nullptr; }
 }
 
+//creates a new node and inserts it into the linked list of kids
 bool LinkedList::Insert(nInst node)
 {
 	nInst * Cur;
@@ -31,14 +33,14 @@ bool LinkedList::Insert(nInst node)
 	*NewNode = node;
 
 	if (NewNode == nullptr) { // case where you attempt to insert nullptr
-		return 1;
+		return 1;	//1 is bad, indicates error which could be treated different ways
 	}
 
 	if (pHead == nullptr) {	// case where there are no nodes in the list	
 		pHead = NewNode;
 		Cur = pHead;
 		Cur->Next = nullptr;
-		return 0;
+		return 0;			//happy to be a zero
 		} 
 	else
 	{
