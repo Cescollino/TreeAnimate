@@ -21,7 +21,7 @@ Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 		angle();
 		length();
 	}
-	if (this->getlevel() < parameters->maxLvl) {
+	if (this->getlevel() < parameters->maxLvl ||length()>=3) {
 		for (int i = 0; i < numberofkids; i++) {
 			position thisposition = PositionKids(numberofkids, i + 1);
 		
@@ -156,7 +156,6 @@ int Node::angle()
 			angle = 270;
 		}
 	}
-	std::cout << angle << "\n";
 	mAngle = angle;
 	
 	}

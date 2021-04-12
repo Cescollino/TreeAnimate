@@ -23,8 +23,8 @@ int main()
     std::cout << "Quel est le multiple de longueur de branche que vous désirez?\n";
     std::getline(std::cin, Longueur);
 
-    while (std::stof(Longueur) < 0.4 || std::stof(Longueur) > 1) {
-        std::cout << "Faites attention, votre chiffre est hors de la plage acceptable. (0.4 - 1)" << std::endl;
+    while (std::stof(Longueur) < 0.6 || std::stof(Longueur) > 1) {
+        std::cout << "Faites attention, votre chiffre est hors de la plage acceptable. (0.6 - 1)" << std::endl;
         std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
         std::getline(std::cin, Longueur);
     };
