@@ -18,7 +18,7 @@ Node::Node(IParam* parameters, int level, Node* Parent, position positionKid)
 	TreeParameters = parameters;
 	mPosition = positionKid;
 	if (mPrevious != nullptr) {
-	//	angle();
+		angle();
 		length();
 	}
 	if (this->getlevel() < parameters->maxLvl) {
@@ -127,7 +127,7 @@ int Node::length()
 
 		length = sqrt((pos1.x - mPosition.x) * (pos1.x - mPosition.x) + (pos1.y - mPosition.y) * (pos1.y - mPosition.y));
 		mLength = length;
-		std::cout << length<< "\n";
+	
 		return length;
 
 	}
@@ -145,7 +145,7 @@ int Node::angle()
 	position pos1 = mPrevious->getPosition();
 
 	if (pos1.x != mPosition.x) {
-		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));
+		angle = radToDeg(atan2((pos1.y - mPosition.y), (pos1.x - mPosition.x)));//
 
 	}
 	else {
@@ -156,19 +156,10 @@ int Node::angle()
 			angle = 270;
 		}
 	}
+	std::cout << angle << "\n";
 	mAngle = angle;
 	
 	}
 	return mAngle;
 
-}
-
-void Node::setDrawn(bool done)
-{
-	mIsDrawn = done;
-}
-
-bool Node::getDrawn()
-{
-	return mIsDrawn;
 }

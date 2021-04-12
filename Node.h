@@ -29,16 +29,10 @@ public:
     int length();
     int angle();
 
-    void setDrawn(bool done);
-    bool getDrawn();
-
-
-
 private:
 
     position mPosition{};
     Node* mPrevious=nullptr; // This can only contain one pointer
-    bool mIsDrawn{};
     int mLength{};
     LinkedList mKids = {}; // this points to a table of Nodes 
     float mAngle{};
