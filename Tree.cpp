@@ -55,7 +55,6 @@ void Tree::makeNode()
 void Tree :: writeData()
 {
 	
-	//std::fstream fs; 
 	std::ofstream fs;  
 	fs.open("Tree.sfa", std::ios::app);
 	if (fs.is_open())
@@ -68,7 +67,7 @@ void Tree :: writeData()
 	nInst head;
 	head.node = pHead;
 	head.Next = nullptr;
-	for (int i{}; i < 13; i++)
+	for (int i{}; i < 14; i++)
 	{
 		float newAngle = asin((0.5*wind(i)) / (init.y-pHead->getPosition().y));
 		float newX = (init.y - pHead->getPosition().y) * sin(newAngle);
@@ -80,7 +79,7 @@ void Tree :: writeData()
 		fs.open("Tree.sfa", std::ios::app);
 		if (fs.is_open())
 		{
-			fs << "wait 2000" << std::endl;
+			fs << "wait 500" << std::endl;
 			fs << "eras 255 255 255." << std::endl;
 			fs << "FRAME" << std::endl;
 			fs.close();
@@ -117,64 +116,32 @@ void Tree::iterateTree(nInst* start, int frame)
 			
 			//draws the initial line, so bottom to pHead
 			fs << "dlin" << " " << init.x << " " << init.y << " " << pHead->getPosition().x << " " << pHead->getPosition().y << " " << std::endl;
+			fs << "cpen"<< "150 220 92" << std::endl;
+			fs << "drec" << " " << 100 <<" " << 260 << " " << 400 << " " << 270 << std::endl;
+			fs << "cpen" << "0 0 0" << std::endl;
+
 			while (kid != nullptr)
 			{
 				if (frame < 1) {
 					fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;
+					fs << "drec" << " " << 100 << " " << 255 << " " << 105 << " " << 260 << std::endl;
 				}
 				else {
 					float realAngle = kid->node->angle();
 					float realX = abs(cos(degToRad(realAngle)) * kid->node->length());// gets us the length of x value before being affected by the wind
-					/*float topacos{};
-					float botacos{};
-					if (realAngle > 90) {
-					topacos = (realX-wind(frame));
-					botacos = kid->node->length();
-					}
-					else {
-					topacos = wind(frame) + realX;
-					botacos = kid->node->length();
-					}
-					if (topacos > botacos) {// ensures that hypotenuse is always bigger than one of the cathetes
-						topacos = botacos;
-					};
-					float newAngleRAD = acos((topacos / botacos));
-					//newAngleRAD = newAngleRAD + (newAngleRAD*.1* kid->node->getlevel());
-					float newAngle = radToDeg(newAngleRAD);
-					float deltaAngle{};
-					if (realAngle > 90) {
-						newAngle =  180-newAngle;
-						deltaAngle = realAngle - newAngle;
-					}
-					else if (realAngle > 180) {
-						newAngle = 270-newAngle;
-						deltaAngle = realAngle - newAngle;
-					}
-					else if (realAngle<0) {
-						newAngle = 360 + newAngle;
-						deltaAngle = realAngle - newAngle;
-					}
-					else{
-							//newAngle = 90 + newAngle;
-							deltaAngle = realAngle - newAngle;
-					}
-				//	float deltaAngle = realAngle - newAngle;*/
-					
+						
 					realAngle = realAngle + windAngle(kid,frame);// deltaAngle;
 										
 
 					int kidx = kid->node->getPrevious()->getPosition().x - kid->node->length() * cos(degToRad(realAngle));
 					int kidy = kid->node->getPrevious()->getPosition().y - kid->node->length() * sin(degToRad(realAngle));
 					kid->node->setPosition(kidx, kidy);
-					//std::cout << kid->node->getPosition().x << "\t";
-					//std::cout << kid->node->getPosition().y << "\n";
-					//  draw a line between the (N) kid and the parent's position
-
-					
+									
 						fs << "dlin" << " " << cur->node->getPosition().x << " " << cur->node->getPosition().y << " " <<
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;
 
+						fs << "drec" << " " << 100+22*frame << " " << 250 - wind(frame) << " " << 105+ 22*frame << " " << 265 << std::endl;
 				}
 			
 					iterateTree(kid, frame);
@@ -191,38 +158,46 @@ void Tree::iterateTree(nInst* start, int frame)
 float Tree::windAngle(nInst* kid,int frame)
 {
 	float realAngle = kid->node->angle();
+	if (realAngle < 0) { realAngle = 360 + realAngle; }
 	float realX = abs(cos(degToRad(realAngle)) * kid->node->length());// gets us the length of x value before being affected by the wind
 	float topacos{};
 	float botacos{};
-	if (realAngle > 90) {
+	
+
+	if (realAngle > 90 && realAngle <= 180 || realAngle > 270 && realAngle < 360) { 
 		topacos = (realX - wind(frame));
+		botacos = kid->node->length();
+
+	}
+	else if (realAngle > 0 && realAngle < 90 || realAngle > 180 && realAngle < 270) {
+		topacos = wind(frame) + realX;
 		botacos = kid->node->length();
 	}
 	else {
 		topacos = wind(frame) + realX;
 		botacos = kid->node->length();
 	}
+
+
 	if (topacos > botacos) {// ensures that hypotenuse is always bigger than one of the cathetes
 		topacos = botacos;
 	};
+	
+
 	float newAngleRAD = acos((topacos / botacos));
-	//newAngleRAD = newAngleRAD + (newAngleRAD*.1* kid->node->getlevel());
+//	newAngleRAD = newAngleRAD + (newAngleRAD*.1* kid->node->getlevel());
 	float newAngle = radToDeg(newAngleRAD);
 	float deltaAngle{};
-	if (realAngle > 90) {
+	if (realAngle > 90 && realAngle < 180) {
 		newAngle = 180 - newAngle;
 		deltaAngle = realAngle - newAngle;
-	}
-	else if (realAngle > 180) {
+	}else if (realAngle > 180 && realAngle < 270) {
 		newAngle = 270 - newAngle;
 		deltaAngle = realAngle - newAngle;
-	}
-	else if (realAngle < 0) {
-		newAngle = 360 + newAngle;
+	}else if (realAngle > 270 && realAngle < 360) {
+		newAngle = 360 - newAngle;
 		deltaAngle = realAngle - newAngle;
-	}
-	else {
-		//newAngle = 90 + newAngle;
+	}else {
 		deltaAngle = realAngle - newAngle;
 	}
 	return deltaAngle;
