@@ -24,6 +24,7 @@ public:
     void writeData();
     float wind(int frame);
     void iterateTree(nInst* start, int frame);
+    float windAngle(nInst* kid,int frame);
 private:
     position init{};
     Node* pHead = nullptr;

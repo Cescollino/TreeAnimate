@@ -124,16 +124,16 @@ void Tree::iterateTree(nInst* start, int frame)
 						kid->node->getPosition().x << " " << kid->node->getPosition().y << " " << std::endl;
 				}
 				else {
-					int realAngle = kid->node->angle();
-					int realX = abs(cos(degToRad(realAngle)) * kid->node->length());// gets us the length of x value before being affected by the wind
-					float topacos{};
-						float botacos{};
+					float realAngle = kid->node->angle();
+					float realX = abs(cos(degToRad(realAngle)) * kid->node->length());// gets us the length of x value before being affected by the wind
+					/*float topacos{};
+					float botacos{};
 					if (realAngle > 90) {
 					topacos = (realX-wind(frame));
 					botacos = kid->node->length();
 					}
 					else {
-					topacos = (wind(frame) + realX);
+					topacos = wind(frame) + realX;
 					botacos = kid->node->length();
 					}
 					if (topacos > botacos) {// ensures that hypotenuse is always bigger than one of the cathetes
@@ -159,9 +159,9 @@ void Tree::iterateTree(nInst* start, int frame)
 							//newAngle = 90 + newAngle;
 							deltaAngle = realAngle - newAngle;
 					}
-				//	float deltaAngle = realAngle - newAngle;
+				//	float deltaAngle = realAngle - newAngle;*/
 					
-					realAngle = realAngle + deltaAngle;
+					realAngle = realAngle + windAngle(kid,frame);// deltaAngle;
 										
 
 					int kidx = kid->node->getPrevious()->getPosition().x - kid->node->length() * cos(degToRad(realAngle));
@@ -186,4 +186,44 @@ void Tree::iterateTree(nInst* start, int frame)
 	}
 	fs.close();
 
+}
+
+float Tree::windAngle(nInst* kid,int frame)
+{
+	float realAngle = kid->node->angle();
+	float realX = abs(cos(degToRad(realAngle)) * kid->node->length());// gets us the length of x value before being affected by the wind
+	float topacos{};
+	float botacos{};
+	if (realAngle > 90) {
+		topacos = (realX - wind(frame));
+		botacos = kid->node->length();
+	}
+	else {
+		topacos = wind(frame) + realX;
+		botacos = kid->node->length();
+	}
+	if (topacos > botacos) {// ensures that hypotenuse is always bigger than one of the cathetes
+		topacos = botacos;
+	};
+	float newAngleRAD = acos((topacos / botacos));
+	//newAngleRAD = newAngleRAD + (newAngleRAD*.1* kid->node->getlevel());
+	float newAngle = radToDeg(newAngleRAD);
+	float deltaAngle{};
+	if (realAngle > 90) {
+		newAngle = 180 - newAngle;
+		deltaAngle = realAngle - newAngle;
+	}
+	else if (realAngle > 180) {
+		newAngle = 270 - newAngle;
+		deltaAngle = realAngle - newAngle;
+	}
+	else if (realAngle < 0) {
+		newAngle = 360 + newAngle;
+		deltaAngle = realAngle - newAngle;
+	}
+	else {
+		//newAngle = 90 + newAngle;
+		deltaAngle = realAngle - newAngle;
+	}
+	return deltaAngle;
 }
