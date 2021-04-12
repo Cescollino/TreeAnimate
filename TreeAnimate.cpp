@@ -12,16 +12,34 @@ int main()
     std::string Mbranches{};
     std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
     std::getline(std::cin, Mbranches);
+    while (std::stoi(Mbranches) < 2 || std::stoi(Mbranches) > 10) {
+        std::cout << "Faites attention, votre chiffre est hors de la plage acceptable. (2 - 10)" << std::endl;
+        std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
+        std::getline(std::cin, Mbranches);
+    };
     Parameters.maxBranches = std::stoi(Mbranches);
     //cherche le multiple qui sera utilise pour trouver la longueur d'un branche 
     std::string Longueur{};
     std::cout << "Quel est le multiple de longueur de branche que vous désirez?\n";
     std::getline(std::cin, Longueur);
+
+    while (std::stof(Longueur) < 0.4 || std::stof(Longueur) > 1) {
+        std::cout << "Faites attention, votre chiffre est hors de la plage acceptable. (0.4 - 1)" << std::endl;
+        std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
+        std::getline(std::cin, Longueur);
+    };
     Parameters.length =std::stof(Longueur);
 
     std::string NMax{};
     std::cout << "Quel est le niveau maximal de noeuds que vous désirez?\n";
     std::getline(std::cin, NMax);
+
+    while (std::stoi(NMax) < 2 || std::stoi(NMax) > 7) {
+        std::cout << "Faites attention, votre chiffre est hors de la plage acceptable.(2-7)" << std::endl;
+        std::cout << "Quel est le nombre maximal de branches que vous désirez?\n";
+        std::getline(std::cin, NMax);
+    };
+
     Parameters.maxLvl =std::stoi(NMax);
 
     Tree mytree(Parameters);
